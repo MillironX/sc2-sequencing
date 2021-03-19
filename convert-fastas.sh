@@ -12,7 +12,7 @@ FASTANAME=$(basename -s .fastas.tar "$FASTAFILE")
 mkdir "$FASTANAME"
 
 # Untar the tarball
-tar -xf "$FASTAFILE" -C "$FASTANAME"
+tar -xf "$FASTAFILE" -C "$FASTANAME" --force-local
 
 # Smash all of the FASTAs together into a single file
 cat "$FASTANAME"/*.fasta > "$FASTANAME"/"$FASTANAME".fasta
