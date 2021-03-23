@@ -15,7 +15,7 @@ fi
 # Find the directory we are supposed to copy
 # If no directory was passed, check to see if the current directory will work
 if [ "$FOLDERIN" = "" ]; then
-  if [ -d "fast5_pass" ]; then
+  if [[ -n $(find . -type d -name "fast9_pass") ]]; then
     FOLDERPATH="$PWD"
     FOLDERNAME=$(basename "$PWD")
   else
@@ -61,9 +61,9 @@ mkdir -p "$USBDRIVE/$FOLDERNAME/fastq"
 
 # Copy the files
 for FASTA in "${KEEPERS[@]}"; do
-  cp -n $FOLDERPATH/fast5_pass/barcode$FASTA/*.fast5 $USBDRIVE/$FOLDERNAME/fast5 2> /dev/null
-  cp -n $FOLDERPATH/fastq_pass/barcode$FASTA/*.fastq $USBDRIVE/$FOLDERNAME/fastq 2> /dev/null
-  cp -n $FOLDERPATH/fastq_pass/barcode$FASTA/*.fastq.gz $USBDRIVE/$FOLDERNAME/fastq 2> /dev/null
+  cp -n $FOLDERPATH/*/fast5_pass/barcode$FASTA/*.fast5 $USBDRIVE/$FOLDERNAME/fast5 2> /dev/null
+  cp -n $FOLDERPATH/*/fastq_pass/barcode$FASTA/*.fastq $USBDRIVE/$FOLDERNAME/fastq 2> /dev/null
+  cp -n $FOLDERPATH/*/fastq_pass/barcode$FASTA/*.fastq.gz $USBDRIVE/$FOLDERNAME/fastq 2> /dev/null
 done
 
 # Make sure we end on a happy note, regardless if there were actually 96 barcodes
