@@ -14,7 +14,7 @@ fi
 
 # Find the directory we are supposed to copy
 # If no directory was passed, check to see if the current directory will work
-if [ "$FOLDERIN" = "" ]; then
+if [[ -n "$FOLDERIN" = "" ]]; then
   if [[ -n $(find . -type d -name "fast5_pass") ]]; then
     FOLDERPATH="$PWD"
     FOLDERNAME=$(basename "$PWD")
@@ -30,7 +30,7 @@ else
 fi
 
 # Calculate the FASTAs that need copied
-if [ ! "$OFFSET" = "1" ]; then
+if [[ "$OFFSET" -gt 1 ]]; then
   if [[ "$OFFSET" -lt 7 ]]; then
     KEEPERS=(01 02 03 04 05 06)
   else
@@ -48,6 +48,10 @@ fi
 
 # Find where the flash drive is mounted
 USBDRIVE=$(mount | grep /media | awk '{print $3}')
+if [[ -n "$USBDRIVE" ]]; then
+  echo "No USB drive was detected. Exiting now."
+  exit 1
+fi
 
 # Prompt the users
 echo "Extracting FAST5/FASTQ from" "$FOLDERNAME" "to USB Device $USBDRIVE, skipping after" "$OFFSET""."
