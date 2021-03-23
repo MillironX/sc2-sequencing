@@ -15,7 +15,7 @@ fi
 # Find the directory we are supposed to copy
 # If no directory was passed, check to see if the current directory will work
 if [ "$FOLDERIN" = "" ]; then
-  if [[ -n $(find . -type d -name "fast9_pass") ]]; then
+  if [[ -n $(find . -type d -name "fast5_pass") ]]; then
     FOLDERPATH="$PWD"
     FOLDERNAME=$(basename "$PWD")
   else
