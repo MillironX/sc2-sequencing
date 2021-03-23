@@ -43,7 +43,7 @@ if [ ! "$OFFSET" = "1" ]; then
     done
   done
 else
-  KEEPERS=( $(seq "%02g" 01 96) )
+  KEEPERS=( $(seq -f "%02g" 01 96) )
 fi
 
 # Find where the flash drive is mounted
