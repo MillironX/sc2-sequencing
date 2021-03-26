@@ -1,0 +1,24 @@
+#!/bin/bash
+# Combines the output from the ONT GridION into a single compressed fastq file
+
+# Initiation, get some important info
+RUNNAME=$(basename "${1}")
+NUMCPU=$(grep -c processor < /proc/cpuinfo)
+OUTNAME="$RUNNAME"_demux
+
+#echo "$RUNNAME"
+#echo "$NUMCPU"
+#echo "$OUTNAME"
+
+# Let guppy do its thing
+guppy_barcoder --input_path "$RUNNAME" --save_path "$OUTNAME" --recursive --records_per_fastq 0 --compress_fastq --worker_threads "$NUMCPU" --device cuda:all:100%
+
+# Unzip the fastqs
+parallel --gnu -j12 --eta gunzip ::: "$OUTNAME"/*/*.fastq.gz
+
+# Squish them together
+cat "$OUTNAME"/*/*.fastq > "$OUTNAME"/"$RUNNAME".fastq
+
+# Rezip the fastqs
+parallel --gnu -j"$NUMCPU" --eta gzip ::: "$OUTNAME"/*/*.fastq
+gzip "$OUTNAME"/"$RUNNAME".fastq
