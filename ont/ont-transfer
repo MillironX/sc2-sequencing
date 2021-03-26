@@ -14,7 +14,7 @@ fi
 
 # Find the directory we are supposed to copy
 # If no directory was passed, check to see if the current directory will work
-if [[ -n "$FOLDERIN" = "" ]]; then
+if [[ ! -n "$FOLDERIN" ]]; then
   if [[ -n $(find . -type d -name "fast5_pass") ]]; then
     FOLDERPATH="$PWD"
     FOLDERNAME=$(basename "$PWD")
@@ -30,16 +30,16 @@ else
 fi
 
 # Calculate the FASTAs that need copied
-if [[ "$OFFSET" -gt 1 ]]; then
-  if [[ "$OFFSET" -lt 7 ]]; then
+if [[ $OFFSET -gt 1 ]]; then
+  if [[ $OFFSET -lt 7 ]]; then
     KEEPERS=(01 02 03 04 05 06)
   else
     KEEPERS=(07 08 09 10 11 12)
   fi
   for ((i = 1; i < 8; ++i)); do
-    WORKING=("${KEEPERS[@]: -6}")
+    WORKING=(${KEEPERS[@]: -6})
     for ((j = 0; j < 6; ++j)); do
-      KEEPERS+=($(("${WORKING[j]}" + 12)))
+      KEEPERS+=($(( 10#${WORKING[j]} + 12 )))
     done
   done
 else
@@ -47,14 +47,15 @@ else
 fi
 
 # Find where the flash drive is mounted
-USBDRIVE=$(mount | grep /media | awk '{print $3}')
-if [[ -n "$USBDRIVE" ]]; then
+# Note that this only works on GridIONs thanks to goofy mounting
+USBDRIVE=$(mount | grep /data | awk '{print $3}' | tail -n1)
+if [[ -n $(echo $USBDRIVE | grep scratch) ]]; then
   echo "No USB drive was detected. Exiting now."
   exit 1
 fi
 
 # Prompt the users
-echo "Extracting FAST5/FASTQ from" "$FOLDERNAME" "to USB Device $USBDRIVE, skipping after" "$OFFSET""."
+echo "Extracting FAST5/FASTQ from $FOLDERNAME to USB Device $USBDRIVE, skipping after $OFFSET."
 echo "If this is not correct, press CTRL+C within the next 10 seconds to abort..."
 sleep 10
 echo "Proceeding..."
@@ -64,7 +65,7 @@ mkdir -p "$USBDRIVE/$FOLDERNAME/fast5"
 mkdir -p "$USBDRIVE/$FOLDERNAME/fastq"
 
 # Copy the files
-for FASTA in "${KEEPERS[@]}"; do
+for FASTA in ${KEEPERS[@]}; do
   cp -n $FOLDERPATH/*/fast5_pass/barcode$FASTA/*.fast5 $USBDRIVE/$FOLDERNAME/fast5 2> /dev/null
   cp -n $FOLDERPATH/*/fastq_pass/barcode$FASTA/*.fastq $USBDRIVE/$FOLDERNAME/fastq 2> /dev/null
   cp -n $FOLDERPATH/*/fastq_pass/barcode$FASTA/*.fastq.gz $USBDRIVE/$FOLDERNAME/fastq 2> /dev/null
