@@ -1,1 +1,1 @@
-limsdatapull/fakesecrets filter=git-crypt diff=git-crypt
+limsdatapull/updatedata.py filter=git-crypt diff=git-crypt
