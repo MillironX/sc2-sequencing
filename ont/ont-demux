@@ -14,7 +14,7 @@ OUTNAME="$RUNNAME"_demux
 guppy_barcoder --input_path "$RUNNAME" --save_path "$OUTNAME" --recursive --records_per_fastq 0 --compress_fastq --worker_threads "$NUMCPU" --device cuda:all:100%
 
 # Unzip the fastqs
-parallel --gnu -j12 --eta gunzip ::: "$OUTNAME"/*/*.fastq.gz
+parallel --gnu -j"$NUMCPU" --eta gunzip ::: "$OUTNAME"/*/*.fastq.gz
 
 # Squish them together
 cat "$OUTNAME"/*/*.fastq > "$OUTNAME"/"$RUNNAME".fastq
