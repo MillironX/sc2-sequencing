@@ -28,5 +28,13 @@ $ chmod +x convert-fastas.sh
 
 3. Press the Win+R on the keyboard
 4. Type `shell:sendto` and press Enter
-5. Right-click in the newly opened window, and click "New Shortcut"
+5. Right-click in the newly opened window, and click "New | Shortcut..."
+6. Type `C:\cygwin64\bin\bash.exe` and click Next
+7. Type `Convert FASTA Tarball` or something else memorable and click Finish
+8. Right-click the newly created shortcut and click Properties
+9. In the Target textbox, add ` --login convert-fastas.sh` (including the space) to the existing text
+10. Click OK
+
+An item will now be added to the Right click | Send to menu for FASTA tarballs. Once clicked, the extracted tarballs can be found in `C:\cygwin64\home\<USERNAME>`.
+
 
