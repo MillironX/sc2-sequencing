@@ -47,7 +47,7 @@ for fastq in fastqs
     end
 
     # Swap the column and row
-    well_num = string(last(id_row.WellNum[1],1), first(id_row.WellNum[1],1))
+    well_num = string(last(id_row.WellNum[1],2), first(id_row.WellNum[1],1))
 
     # Construct the new filename
     fastq_newname = string(well_num, "_", fastq)
