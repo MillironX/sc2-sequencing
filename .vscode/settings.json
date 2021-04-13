@@ -1,11 +1,13 @@
 {
     "cSpell.words": [
+        "LIMS",
         "Nanopore",
         "chmod",
         "cygpath",
         "demux",
         "fasta",
         "fastas",
+        "limsdatapull",
         "miseq",
         "mkdir",
         "wphl"
