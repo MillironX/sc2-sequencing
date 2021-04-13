@@ -1,13 +1,14 @@
 # ClearLabs
 
-This script converts the FASTA tarball that is downloaded through the ClearLabs web portal into individual and a collective FASTA file using Cygwin.
+This script converts the FASTA tarball that is downloaded through the ClearLabs
+web portal into individual and a collective FASTA file using Cygwin.
 
 ## Usage
 
 To be run in Cygwin
 
 ```bash
-$ convert-fastas.sh TARBALL
+convert-fastas.sh TARBALL
 ```
 
 ## Installation
@@ -20,11 +21,11 @@ This script requires [Cygwin](https://cygwin.com/install.html).
     3. All other default options will work
 2. Open the Cygwin console and use the following commands
 
-```bash
-$ git clone https://github.com/MillironX/wphl-bioinformatics.git
-$ cp wphl-bioinformatics/clearlabs/convert-fastas.sh ~
-$ chmod +x convert-fastas.sh
-```
+    ```bash
+    git clone https://github.com/MillironX/wphl-bioinformatics.git
+    cp wphl-bioinformatics/clearlabs/convert-fastas.sh ~
+    chmod +x convert-fastas.sh
+    ```
 
 3. Press the Win+R on the keyboard
 4. Type `shell:sendto` and press Enter
@@ -32,9 +33,10 @@ $ chmod +x convert-fastas.sh
 6. Type `C:\cygwin64\bin\bash.exe` and click Next
 7. Type `Convert FASTA Tarball` or something else memorable and click Finish
 8. Right-click the newly created shortcut and click Properties
-9. In the Target textbox, add ` --login convert-fastas.sh` (including the space) to the existing text
+9. In the Target textbox, add a space and `--login convert-fastas.sh` to the
+   existing text
 10. Click OK
 
-An item will now be added to the Right click | Send to menu for FASTA tarballs. Once clicked, the extracted tarballs can be found in `C:\cygwin64\home\<USERNAME>`.
-
-
+An item will now be added to the Right click | Send to menu for FASTA tarballs.
+Once clicked, the extracted tarballs can be found in
+`C:\cygwin64\home\<USERNAME>`.

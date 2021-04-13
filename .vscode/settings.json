@@ -4,6 +4,8 @@
         "chmod",
         "cygpath",
         "demux",
+        "fasta",
+        "fastas",
         "miseq",
         "mkdir",
         "wphl"
