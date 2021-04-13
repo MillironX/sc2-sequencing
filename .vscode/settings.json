@@ -4,6 +4,7 @@
         "chmod",
         "cygpath",
         "demux",
+        "miseq",
         "mkdir",
         "wphl"
     ]
