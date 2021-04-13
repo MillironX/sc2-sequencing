@@ -1,5 +1,6 @@
 #!/usr/bin/julia
-# Renames the FASTQ files in a directory by prepending the well number
+# Renames the FASTQ files in a directory by prepending the well number based on
+# a MiSeq run workbook
 
 # Activate the proper packages
 using Tk
