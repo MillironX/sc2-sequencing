@@ -1,9 +1,12 @@
 # Oxford Nanopore Technologies
 
-These scripts are for use with a GridION, to make the files and folder structures correspond more closely to those required by downstream bioinformatics programs.
-Note that at the time of writing, the GridION runs Ubuntu 16.04 LTS, and mounts USB drives in the `/data` folder, and these scripts contain some "faults" to work around these idiosyncrasies.
+These scripts are for use with a GridION, to make the files and folder
+structures correspond more closely to those required by downstream
+bioinformatics programs. Note that at the time of writing, the GridION runs
+Ubuntu 16.04 LTS, and mounts USB drives in the `/data` folder, and these scripts
+contain some "faults" to work around these idiosyncrasies.
 
-## File Descriptors
+## Usage
 
 ### `ont-demux`
 
@@ -11,7 +14,11 @@ Note that at the time of writing, the GridION runs Ubuntu 16.04 LTS, and mounts 
 ont-demux FAP_FOLDER
 ```
 
-Consolidates all FAST5s into a single gzipped FASTQ using ONT's `guppy_barcoder`. Note that this is for MinKNOW's default settings of 4000 reads/file. It is _highly_ recommended to set the "Number of Reads per File" entry in MinKNOW to 0, and checking "Compress FASTQs" to produce nearly the same results.
+Consolidates all FAST5s into a single gzipped FASTQ using ONT's
+`guppy_barcoder`. Note that this is for MinKNOW's default settings of 4000
+reads/file. It is _highly_ recommended to set the "Number of Reads per File"
+entry in MinKNOW to 0, and checking "Compress FASTQs" to produce nearly the same
+results.
 
 ### `ont-transfer`
 
@@ -19,7 +26,10 @@ Consolidates all FAST5s into a single gzipped FASTQ using ONT's `guppy_barcoder`
 ont-transfer [-s 1|6|12] FAP_FOLDER
 ```
 
-Transfers all of the passing FAST5 and FASTQ files to the first available USB drive, skipping empty barcodes based on the number of the first skip passed through the `-s` parameter, consolidating all files of the same type into one folder for easier sorting and uploading.
+Transfers all of the passing FAST5 and FASTQ files to the first available USB
+drive, skipping empty barcodes based on the number of the first skip passed
+through the `-s` parameter, consolidating all files of the same type into one
+folder for easier sorting and uploading.
 
 ## Installation
 
@@ -29,7 +39,8 @@ Transfers all of the passing FAST5 and FASTQ files to the first available USB dr
 - guppy (Get from [ONT Community](https://nanoporetech.com/community)
 - GNU Parallel
 
-See ONT for guppy installation instructions. Others may be installed by opening a terminal and running
+See ONT for guppy installation instructions. Others may be installed by opening
+a terminal and running
 
 ```bash
 sudo apt-get install git parallel -y
