@@ -90,7 +90,5 @@ for FASTA in ${KEEPERS[@]}; do
 
     # Zip up the copied fastq
     gzip -f $FASTQRESULT
-  else
-    echo "No suitable files found for Barcode $FASTA, skipping"
   fi
 done
