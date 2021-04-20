@@ -1,8 +1,10 @@
 {
     "cSpell.words": [
         "LIMS",
+        "NUMCPU",
         "Nanopore",
         "chmod",
+        "cuda",
         "cygpath",
         "demux",
         "fasta",
