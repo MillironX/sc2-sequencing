@@ -60,16 +60,37 @@ echo "If this is not correct, press CTRL+C within the next 10 seconds to abort..
 sleep 10
 echo "Proceeding..."
 
+# Simplify the output paths
+USBPATH="$USBDRIVE/$FOLDERNAME"
+FAST5PATH="$USBPATH/fast5"
+FASTQPATH="$USBPATH/fastq"
+
 # Make output directories
-mkdir -p "$USBDRIVE/$FOLDERNAME/fast5"
-mkdir -p "$USBDRIVE/$FOLDERNAME/fastq"
+mkdir -p "$FAST5PATH"
+mkdir -p "$FASTQPATH"
 
 # Copy the files
 for FASTA in ${KEEPERS[@]}; do
-  cp -n $FOLDERPATH/*/fast5_pass/barcode$FASTA/*.fast5 $USBDRIVE/$FOLDERNAME/fast5 2> /dev/null
-  cp -n $FOLDERPATH/*/fastq_pass/barcode$FASTA/*.fastq $USBDRIVE/$FOLDERNAME/fastq 2> /dev/null
-  cp -n $FOLDERPATH/*/fastq_pass/barcode$FASTA/*.fastq.gz $USBDRIVE/$FOLDERNAME/fastq 2> /dev/null
-done
+  # Check to see if there are any files here
+  if [[ -n $(find $FOLDERPATH -type f \( -name "*.fast5" -o -name "*.fastq" -o -name "*.fastq.gz" \) -path "*_pass*barcode$FASTA*") ]]; then
+    # Copy FAST5s
+    find $FOLDERPATH -name "*.fast5" -path "*_pass*barcode$FASTA*" -exec cp -n {} $FAST5PATH \;
 
-# Make sure we end on a happy note, regardless if there were actually 96 barcodes
-exit 0
+    # Unzip any gzipped fastqs
+    find $FOLDERPATH -name "*.fastq.gz" -path "*_pass*barcode$FASTA*" -print0 | xargs -0 -r -L1 -P0 gunzip
+
+    # Get the name of the resulting FASTQ file
+    FASTQRESULT="$FASTQPATH"/"$FOLDERNAME"_pass_barcode"$FASTA".fastq
+
+    # Concatenate the fastqs
+    cat $FOLDERPATH/*/fastq_pass/barcode$FASTA/*.fastq > $FASTQRESULT
+
+    # Zip up the remainders
+    find $FOLDERPATH -name "*.fastq" -path "*_pass*barcode$FASTA*" -print0 | xargs -0 -r -L1 -P0 gzip
+
+    # Zip up the copied fastq
+    gzip $FASTQRESULT
+  else
+    echo "No suitable files found for Barcode $FASTA, skipping"
+  fi
+done
