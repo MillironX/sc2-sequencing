@@ -89,7 +89,7 @@ for FASTA in ${KEEPERS[@]}; do
     find $FOLDERPATH -name "*.fastq" -path "*_pass*barcode$FASTA*" -print0 | xargs -0 -r -L1 -P0 gzip
 
     # Zip up the copied fastq
-    gzip $FASTQRESULT
+    gzip -f $FASTQRESULT
   else
     echo "No suitable files found for Barcode $FASTA, skipping"
   fi
