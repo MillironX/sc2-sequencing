@@ -72,7 +72,10 @@ mkdir -p "$FASTQPATH"
 # Copy the files
 for FASTA in ${KEEPERS[@]}; do
   # Check to see if there are any files here
-  if [[ -n $(find $FOLDERPATH -type f \( -name "*.fast5" -o -name "*.fastq" -o -name "*.fastq.gz" \) -path "*_pass*barcode$FASTA*") ]]; then
+  if [[ -n $(find $FOLDERPATH -type f \( -name "*.fast5" \) -path "*_pass*barcode$FASTA*") ]]; then
+    # Find the uid that the GridION gives to this sample
+    ONTID=$(find $FOLDERPATH -name "*.fast5" -path "*_pass*barcode*$FASTA*" | head -n 1 | xargs basename | awk '{split($0,a,"_"); print a[4]}')
+
     # Copy FAST5s
     find $FOLDERPATH -name "*.fast5" -path "*_pass*barcode$FASTA*" -exec cp -n {} $FAST5PATH \;
 
@@ -80,7 +83,7 @@ for FASTA in ${KEEPERS[@]}; do
     find $FOLDERPATH -name "*.fastq.gz" -path "*_pass*barcode$FASTA*" -print0 | xargs -0 -r -L1 -P0 gunzip
 
     # Get the name of the resulting FASTQ file
-    FASTQRESULT="$FASTQPATH"/"$FOLDERNAME"_pass_barcode"$FASTA".fastq
+    FASTQRESULT="$FASTQPATH"/"$FOLDERNAME"_pass_barcode"$FASTA"_"$ONTID"_0.fastq
 
     # Concatenate the fastqs
     cat $FOLDERPATH/*/fastq_pass/barcode$FASTA/*.fastq > $FASTQRESULT
