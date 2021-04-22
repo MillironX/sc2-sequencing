@@ -72,7 +72,7 @@ mkdir -p "$FASTQPATH"
 # Copy the files
 for FASTA in ${KEEPERS[@]}; do
   # Check to see if there are any files here
-  if [[ -n $(find $FOLDERPATH -type f \( -name "*.fast5" \) -path "*_pass*barcode$FASTA*") ]]; then
+  if [[ -n $(find $FOLDERPATH -type f -name "*.fast5" -path "*_pass*barcode$FASTA*") ]]; then
     # Find the uid that the GridION gives to this sample
     ONTID=$(find $FOLDERPATH -name "*.fast5" -path "*_pass*barcode*$FASTA*" | head -n 1 | xargs basename | awk '{split($0,a,"_"); print a[4]}')
 
