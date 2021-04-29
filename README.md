@@ -1,6 +1,6 @@
 # SC2 Sequencing Cheats
 
-File manipulation/bioinformatics-type scripts that my colleuges have found
+File manipulation/bioinformatics-type scripts that my colleagues have found
 useful in sequencing SARS-CoV2 (SC2).
 
 These scripts have various purposes, uses, and instructions. The only unifying
