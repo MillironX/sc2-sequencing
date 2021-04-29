@@ -1,10 +1,11 @@
 # Oxford Nanopore Technologies
 
-These scripts are for use with a GridION, to make the files and folder
-structures correspond more closely to those required by downstream
+These scripts are for use with a GridION or its output file, to make the files
+and folder structures correspond more closely to those required by downstream
 bioinformatics programs. Note that at the time of writing, the GridION runs
 Ubuntu 16.04 LTS, and mounts USB drives in the `/data` folder, and these scripts
-contain some "faults" to work around these idiosyncrasies.
+contain some "faults" to work around these idiosyncrasies (i.e. they will not
+pass in [ShellCheck]).
 
 ## Usage
 
@@ -31,7 +32,7 @@ julia --project=PATH_TO_ONT_FOLDER PATH_TO_ONT-RENAME.jl
 In practice, this looks like
 
 ```powershell
-julia --project=C:\Users\MillironX\ont C:\Users\MillironX\illumina\ont-rename.jl
+julia --project=C:\Users\MillironX\ont C:\Users\MillironX\ont\ont-rename.jl
 ```
 
 ### `ont-demux` (deprecated)
@@ -45,9 +46,9 @@ same results using far fewer resources and in far less time.**
 
 Consolidates all FAST5s into a single gzipped FASTQ using ONT's
 `guppy_barcoder`. Note that this is for MinKNOW's default settings of 4000
-reads/file. It is _highly_ recommended to set the "Number of Reads per File"
+reads/file. ~~It is _highly_ recommended to set the "Number of Reads per File"
 entry in MinKNOW to 0, and checking "Compress FASTQs" to produce nearly the same
-results.
+results~~ (this functionality has been taken out of recent updates to MinKNOW).
 
 ## Installation
 
@@ -56,7 +57,7 @@ results.
 #### Requirements
 
 - git
-- guppy (Get from [ONT Community](https://nanoporetech.com/community)
+- guppy (Get from [ONT Community])
 - GNU Parallel
 
 See ONT for guppy installation instructions. Others may be installed by opening
@@ -71,17 +72,19 @@ sudo apt-get install git parallel -y
 Open a terminal (Ctrl+Alt+T), and use the following commands
 
 ```bash
-git clone https://github.com/MillironX/wphl-bioinformatics
+git clone https://github.com/MillironX/sc2-sequencing
 mkdir ~/bin
 echo "export PATH=$PATH:$HOME/bin" >> ~/.bashrc
-cp wphl-bioinformatics/ont/* ~/bin
+cp sc2-sequending/ont/* ~/bin
 chmod +x ~/bin/*
 source ~/.bashrc
 ```
 
 ### `ont-rename`
 
-These scripts require [Julia](https://julialang.org).
+These scripts require [Julia].
+
+Windows install instructions (I will assume Linux users can adapt):
 
 1. Download and install Julia
     1. Select "Add Julia to PATH" as an option
@@ -97,6 +100,10 @@ These scripts require [Julia](https://julialang.org).
 10. Run `exit()`
 11. Close PowerShell
 12. Right-click the Windows desktop, and click "New | Shortcut..."
-13. Type `julia --project=%USERPROFILE%\ont
-    %USERPROFILE%\ont\ont-rename.jl` and click Next
+13. Type `julia --project=%USERPROFILE%\ont %USERPROFILE%\ont\ont-rename.jl` and
+    click Next
 14. Type `Rename ONT FASTQs` or something else memorable and click "Finish"
+
+[ShellCheck]: https://shellcheck.net
+[ONT Community]: https://nanoporetech.com/community
+[Julia]: https://julialang.org

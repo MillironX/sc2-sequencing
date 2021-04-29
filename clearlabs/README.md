@@ -22,8 +22,8 @@ This script requires [Cygwin](https://cygwin.com/install.html).
 2. Open the Cygwin console and use the following commands
 
     ```bash
-    git clone https://github.com/MillironX/wphl-bioinformatics.git
-    cp wphl-bioinformatics/clearlabs/convert-fastas.sh ~
+    git clone https://github.com/MillironX/sc2-sequencing.git
+    cp sc2-sequencing/clearlabs/convert-fastas.sh ~
     chmod +x convert-fastas.sh
     ```
 

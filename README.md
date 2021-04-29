@@ -1,10 +1,11 @@
-# wphl-bioinformatics
+# SC2 Sequencing Cheats
 
-Bioinformatics scripts for use at the Wyoming Public Health Laboratory.
+File manipulation/bioinformatics-type scripts that my colleuges have found
+useful in sequencing SARS-CoV2 (SC2).
 
 These scripts have various purposes, uses, and instructions. The only unifying
-thing about them is that they were all written for WPHL. Please check the
-`README` file in each directory for more detailed instructions.
+thing about them is that they were all written for SC2 and related sequencing.
+Please check the `README` file in each directory for more detailed instructions.
 
 ## Encryption
 
@@ -49,7 +50,7 @@ Encryption is GPG-based. If your GPG key has been added to the repository (you
 know if you have access), then run
 
 ```bash
-git clone https://github.com/MillironX/wphl-bioinformatics.git && cd wphl-bioinformatics
+git clone https://github.com/MillironX/sc2-sequencing.git && cd sc2-sequencing
 git-crypt unlock
 ```
 
@@ -57,4 +58,4 @@ The files will now be decrypted and can be usable.
 
 If you need to copy your GPG keys to a new machine to be able to decrypt the
 files, follow the instructions at
-https://www.phildev.net/pgp/gpg_moving_keys.html under "Copy Just Your Keys."
+<https://www.phildev.net/pgp/gpg_moving_keys.html> under "Copy Just Your Keys."

@@ -49,8 +49,8 @@ Cygwin.
 7. In Cygwin console now run
 
     ```bash
-    git clone https://github.com/MillironX/wphl-bioinformatics.git
-    cp wphl-bioinformatics/illumina/dl-fastqs.sh ~
+    git clone https://github.com/MillironX/sc2-sequencing.git
+    cp sc2-sequencing/illumina/dl-fastqs.sh ~
     chmod +x dl-fastqs.sh
     ```
 

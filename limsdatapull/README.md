@@ -4,7 +4,7 @@ Pulls positive SC2 sample IDs and relevant dates from StarLIMS.
 
 **NOTE:** These scripts are encrypted, but are generally intended for use on
 Windows machines. Decrypt them on a Linux/Mac machine using the [entire repo
-instructions](https://github.com/MillironX/wphl-bioinformatics/blob/master/README.md),
+instructions](https://github.com/MillironX/sc2-sequencing/blob/master/README.md),
 then copy over using a secure flash drive or similar method.
 
 ## Usage
